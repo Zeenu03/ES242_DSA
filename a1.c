@@ -25,7 +25,7 @@ void generate_selections(int a[], int n, int k, int b[], void *data, void (*proc
     b[0] = 6; b[1] = 5;
     process_selection(b, 2, data);
 }
-
+// Hello I am Pranav.
 /*
  * See Exercise 2 (a), page 94 in Jeff Erickson's textbook.
  * The exercise only asks you to count the possible splits.
