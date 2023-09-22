@@ -1,80 +1,74 @@
 #include "test.h"
-
+#include <stdio.h>
 #include <string.h> // for testing generate_splits()
 
-void addtoB(int arr[], int k, int b[])
-{
-    for (int i = 0; i < k; i++)
-    {
-        b[i] = arr[i];
+void addtoB(int arr[],int k,int b[]){
+    for (int i=0;i<k;i++){
+        b[i]=arr[i];
     }
 }
-void swap(int *a, int *b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
+void swap(int *a,int *b){
+    int t=*a;
+    *a=*b;
+    *b=t;
 }
 
-void push(int start, int n, int arr[])
-{
-    int hold = arr[start];
-    for (int i = start; i < n - 1; i++)
-    {
-        arr[i] = arr[i + 1];
+void push(int start,int n,int arr[]){
+    int hold=arr[start];
+    for (int i=start;i<n-1;i++){
+        arr[i]=arr[i+1];
     }
-    arr[n - 1] = hold;
+    arr[n-1]=hold;
 }
 
-void printperm(int *b, int k, void *data)
-{
-    for (int i = 0; i < k; i++)
-    {
-        printf("%d ", *(b + i));
+void printperm(int *b,int k,void *data){
+    for (int i=0;i<k;i++){
+        printf("%d ",*(b+i));
     }
-    int *count = (int *)data;
+    int* count=(int*) data;
     (*count)++;
     printf("\n");
 }
 
-void select(int a[], int n, int k, int b[], int len, int end, int *data, void (*process_selection)(int *b, int k, void *data))
-{
-    if (n == k - 1)
-    {
-        addtoB(a, k, b);
+void select(int a[], int n, int k, int b[],int len,int end, int *data, void (*process_selection)(int *b, int k, void *data)){
+    if (n==k-1){
+        addtoB(a,k,b);
         (*process_selection)(b, k, data);
-        for (int i = k; i < end; i++)
-        {
-            swap(&a[k - 1], &a[i]);
-            addtoB(a, k, b);
+        for(int i=k;i<end;i++){
+            swap(&a[k-1],&a[i]);
+            addtoB(a,k,b);
             (*process_selection)(b, k, data);
-            swap(&a[k - 1], &a[i]);
+            swap(&a[k-1],&a[i]);
         }
-        return;
+        return;}
+    
+    select(a,n+1,k,b,len,end,data, process_selection);
+    for(int i=1;i<(1-k+end) ;i++){
+        push(n,len,a);
+        select(a,n+1,k,b,len,end-i,data,process_selection);
     }
-
-    select(a, n + 1, k, b, len, end, data, process_selection);
-    for (int i = 1; i < (1 - k + end); i++)
-    {
-        push(n, len, a);
-        select(a, n + 1, k, b, len, end - i, data, process_selection);
-    }
-    for (int i = 0; i < (len - n - end + k); i++)
-    {
-        push(n, len, a);
+    for(int i=0;i<(len-n-end+k);i++){
+        push(n,len,a);
     }
     return;
 }
 void generate_selections(int a[], int n, int k, int b[], void *data, void (*process_selection)(int *b, int k, void *data))
 {
-    int len = n;
-    int end = n;
-    int start = 0;
-    select(a, start, k, b, len, end, data, process_selection);
+    int len=n;
+    int end=n;
+    int start=0;
+    select(a,start,k,b,len,end,data,process_selection);
+    
 }
 
-
-
+/*
+ * See Exercise 2 (a), page 94 in Jeff Erickson's textbook.
+ * The exercise only asks you to count the possible splits.
+ * In this assignment, you have to generate all possible splits into buf[]
+ * and call process_split() to process them.
+ * The dictionary parameter is an array of words, sorted in dictionary order.
+ * nwords is the number of words in this dictionary.
+ */
 void generate_splits(const char *source, const char *dictionary[], int nwords, char buf[], void *data, void (*process_split)(char buf[], void *data))
 {
     strcpy(buf, "art is toil");
