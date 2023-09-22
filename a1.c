@@ -110,18 +110,27 @@ void generate_splits(const char *source, const char *dictionary[], int nwords, c
 }
 
 
-/*
- * Transform a[] so that it becomes the previous permutation of the elements in it.
- * If a[] is the first permutation, leave it unchanged.
- */
 void previous_permutation(int a[], int n)
 {
-    a[0] = 1;
-    a[1] = 5;
-    a[2] = 4;
-    a[3] = 6;
-    a[4] = 3;
-    a[5] = 2;
+    int maxindex=n-1;
+    int num=0;
+    for (int i=n-1;i>0;i--){
+        if (a[i]<a[i-1]){
+            maxindex=i-1;
+            num=a[maxindex];
+            break;
+        }
+    }
+    for (int i=n-1;i>maxindex;i--){
+        if (a[i]<num){
+            swap(&a[i],&a[maxindex]);
+            break;
+        }
+    }
+    for (int i=maxindex+1;i<=((n+maxindex)/2);i++){
+        swap(&a[i],&a[n-i+maxindex]);
+    }
+    return;
 }
 
 /* Write your tests here. Use the previous assignment for reference. */
