@@ -61,21 +61,54 @@ void generate_selections(int a[], int n, int k, int b[], void *data, void (*proc
     
 }
 
-/*
- * See Exercise 2 (a), page 94 in Jeff Erickson's textbook.
- * The exercise only asks you to count the possible splits.
- * In this assignment, you have to generate all possible splits into buf[]
- * and call process_split() to process them.
- * The dictionary parameter is an array of words, sorted in dictionary order.
- * nwords is the number of words in this dictionary.
- */
+int check(char str[],const char *dictionary[],int nwords){
+    for(int i=0;i<nwords;i++){
+        if(!strcmp(dictionary[i],str)){
+            return 1;
+        }
+    }
+    return 0;
+}
+void splits(const char *source, const char *dictionary[], int nwords, char buf[], void *data, void (*process_split)(char buf[], void *data))
+{
+    // ARTISTOIL
+    char str[strlen(source)+1];
+    for(int i=0;i<strlen(source)+1;i++){
+                str[i]='\0';
+            }
+    for(int i=0;i<9;i++){
+        if(check(strncpy(str,source,i),dictionary,nwords)){
+            char c[strlen(buf)+1];
+            strcpy(c,buf);
+            strncat(buf,str,i);
+            if(i==strlen(source)){
+                process_split(buf,data);
+                // strncpy(buf,)
+                return;
+            }
+            strncat(buf," ",i);
+            splits((source+i),dictionary,nwords,buf,data,process_split);
+            for(int i=0;i<strlen(buf);i++){
+                buf[i]='\0';
+            }
+            strcpy(buf,c);
+            
+        }
+
+    }
+    return;
+    }
+
+
 void generate_splits(const char *source, const char *dictionary[], int nwords, char buf[], void *data, void (*process_split)(char buf[], void *data))
 {
-    strcpy(buf, "art is toil");
-    process_split(buf, data);
-    strcpy(buf, "artist oil");
-    process_split(buf, data);
+    for(int i=0;i<strlen(buf)+1;i++){
+        buf[i]='\0';
+    }
+    splits(source,dictionary,nwords,buf,data,process_split);
+    
 }
+
 
 /*
  * Transform a[] so that it becomes the previous permutation of the elements in it.
