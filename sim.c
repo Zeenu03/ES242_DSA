@@ -236,6 +236,7 @@ move_t best_move(board_t board, player_t player)
 int main()
 {
     /* Your game play logic. */
+    /*arr[15] is created to keep track of empty spaces*/
     int arr[15];
     for(int i = 0; i < 15; i++){
         arr[i] = -1;
