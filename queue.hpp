@@ -1,8 +1,10 @@
 #include <assert.h>
+#include<iostream>
+using namespace std;
 
 template <typename T, int Size>
 struct queue {
-    T elts[Size];
+    T* elts=new T[Size];
     int front;
     int back;
     int len;
@@ -15,9 +17,9 @@ struct queue {
 };
 
 template <typename T, int Size>
-bool is_empty(const queue<T, Size> &q)
+bool empty(const queue<T, Size> &q)
 {
-    return q.len == 0;
+    return (q.len == 0);
 }
 
 template <typename T, int Size>
@@ -37,4 +39,9 @@ T dequeue(queue<T, Size> &q)
     q.front = (q.front + 1 ) % Size;
     --(q.len);
     return e;
+}
+
+template <typename T, int Size>
+void deletion(queue<T, Size> &q){
+    delete []q.elts ;
 }

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/patel/OneDrive/Desktop/DSA_GIT/ES242_DSA_LAB",
-      "program": "c:/Users/patel/OneDrive/Desktop/DSA_GIT/ES242_DSA_LAB/build/Debug/outDebug",
+      "cwd": "c:/Users/patel/OneDrive - iitgn.ac.in/Desktop/Lab DSA Group/ES242_DSA",
+      "program": "c:/Users/patel/OneDrive - iitgn.ac.in/Desktop/Lab DSA Group/ES242_DSA/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
