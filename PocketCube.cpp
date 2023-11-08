@@ -7,6 +7,7 @@
 #include <utility>
 #include<queue>
 #include<map>
+
 using namespace std;
 
 vector<vector<string>> storeOrentation;
@@ -122,7 +123,7 @@ vector<char> solve(vector<string>& input,vector<int>& position,vector<int>& oren
     queue<pair<vector<int>,vector<int>>> q1;             
     q.push(input);
     q1.push(make_pair(position,orentationCubes));
-    visited[ord(position,orentationCubes)] = "Starting";          //S means start
+    visited[ord(position,orentationCubes)] = "Starting";          //S means starting position
     int maxSize=0;
     vector<int> pos, orent;
     vector<string> u;
