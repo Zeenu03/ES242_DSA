@@ -505,6 +505,7 @@ void read_cube(vector<string>& arr){
 //Sample Inputs
 // YRB YGB OGB ORB GYW GOW ROW RYW
 // WRB YBO WOG OGY YRB YRG BWO WGR
+// BOW RGW YBR WGO YOG YOB WBR YRG      F1 U1 R2 F2 U1 R F1 U2 R F1
 
 int main(){
     vector<string> input;

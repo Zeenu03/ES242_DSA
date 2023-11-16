@@ -225,17 +225,16 @@ vector<char> solve(const board& b){
 }
 
 void read_board(board& b){                               //T B L R U D
-    for(int r=0;r<3;r++){                                //1 2 3 4 5 6 0
-        for(int c=0;c<3;c++){
-            if(r*c==1){
-                b.arr[r][c]=0;
-            }
-            else{
-                int val=2;
-                // cin>>val;
-                assert(val!=0);
-                b.arr[r][c]=val;
-            }
+    //There are 6 orentations possible for each cube and we assign values to each of these 6 orentations
+    //such that if top face == 1 then assign value to that cube to be 1
+    //if bottom face == 1 then assign value to that cube to be 2                         
+    //if left face == 1 then assign value to that cube to be 3 
+    //enter 0 when the place is empty                        
+    int val;
+    for(int r=0;r<3;r++){                               //T B L R U D
+        for(int c=0;c<3;c++){                           //1 2 3 4 5 6 0
+            cin>>val;
+            b.arr[r][c]=val;
         }
     }
     return;
